@@ -4,12 +4,11 @@ RUN mkdir /app
 WORKDIR /app
 COPY . /app
 
-RUN npm install -g yarn
-RUN yarn
+RUN npm install
 
 ENV VITE_BACKEND host.docker.internal
 
-RUN yarn build
+RUN npm run build
 
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
