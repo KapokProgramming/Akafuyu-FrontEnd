@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { useQuery } from "react-query";
 import { Wrapper } from "./Status.style";
+import Navbar from "../../components/Navbar/Navbar";
 
 type Response = {
     status: string;
@@ -21,11 +22,14 @@ const Status = () => {
     if (error) return <div>Something went wrong ...</div>
 
     return (
-        <Wrapper>
-            <h3>Backend Status: {data?.status} @{data?.data[0]["NOW()"]}</h3>
-            
-            <Link to="/">back to home</Link>
-        </Wrapper>
+        <>
+            <Navbar />
+            <Wrapper>
+                <h3>Backend Status: {data?.status} @{data?.data[0]["NOW()"]}</h3>
+
+                <Link to="/">back to home</Link>
+            </Wrapper>
+        </>
     );
 }
 

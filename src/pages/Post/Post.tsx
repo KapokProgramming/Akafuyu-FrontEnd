@@ -4,6 +4,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import PostContext from "./PostContext";
 import PostInput from "./PostInput";
 import PostOutput from "./PostOutput";
+import Navbar from "../../components/Navbar/Navbar";
 
 const Post = () => {
     const [markdownText, setMarkdownText] = useState("");
@@ -45,6 +46,7 @@ const Post = () => {
 
     return (
         <PostContext.Provider value={contextValue}>
+            <Navbar />
             <Wrapper>
                 <Title>Markdown Editor</Title>
                 <label>
