@@ -15,7 +15,7 @@ const PostInput = () => {
     return (
         <Wrapper>
             <Title>Markdown Input</Title>
-            <textarea onChange={onInputChange} ></textarea>
+            <TextArea onChange={onInputChange} ></TextArea>
         </Wrapper>
     );
 }
