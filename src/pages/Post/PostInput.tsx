@@ -7,7 +7,7 @@ const PostInput = () => {
 
     const { setMarkdownText } = useContext(PostContext);
 
-    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onInputChange = (e: React.ChangeEvent<any>) : void => {
         const newText = e.target.value;
         setMarkdownText(newText);
     }
@@ -15,7 +15,7 @@ const PostInput = () => {
     return (
         <Wrapper>
             <Title>Markdown Input</Title>
-            <TextArea onChange={onInputChange}></TextArea>
+            <textarea onChange={onInputChange} ></textarea>
         </Wrapper>
     );
 }
