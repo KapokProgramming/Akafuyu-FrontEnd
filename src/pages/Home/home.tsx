@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 
-const Home = async () => {
-    const response = await fetch(`http://${import.meta.env.VITE_BACKEND}:7700/`)
-    const { data, status, errors } = await response.json()
+const Home = () => {
+    const url = `http://${import.meta.env.VITE_BACKEND}:7700/`;
+    console.log(url);
+    fetch(url).then(res => res.json())
+    .then(data => console.log(data))
+
     return (
         <div>
             <h2>Welcome to home</h2>
             <h3>We're working now.</h3>
-            <h3>Status: {status}</h3>
-            
+            <h3>Status</h3>
+
 
             <Link to="/post">posts</Link>
         </div>
