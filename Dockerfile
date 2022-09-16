@@ -1,14 +1,10 @@
-FROM node:16.14.2 as build
+FROM node:16.14.2-alpine as build
 
 RUN mkdir /app
 WORKDIR /app
 COPY . /app
 
-RUN set -eux \
-    & apk add \
-        --no-cache \
-        nodejs \
-        yarn
+RUN apk add --no-cache nodejs yarn
 
 RUN yarn
 
