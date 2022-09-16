@@ -101,6 +101,6 @@ jobs:
             docker stop akafuyu-frontend
             docker rm akafuyu-frontend
             docker pull ${{ steps.meta.outputs.tags }}
-            docker run -d -p 80:80 --restart always --name akafuyu-frontend ${{ steps.meta.outputs.tags }}
+            docker run -d -p 80:80 --env VITE_BACKEND=${{secrets.VITE_BACKEND}} --restart always --name akafuyu-frontend ${{ steps.meta.outputs.tags }}
 
   

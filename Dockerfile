@@ -8,7 +8,6 @@ RUN apk add --no-cache nodejs yarn
 
 RUN yarn
 
-ENV VITE_BACKEND host.docker.internal
 
 RUN yarn build
 
