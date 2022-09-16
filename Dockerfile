@@ -4,7 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY . /app
 
-RUN npm install yarn
+RUN npm install -g yarn
 RUN yarn
 
 ENV VITE_BACKEND host.docker.internal
