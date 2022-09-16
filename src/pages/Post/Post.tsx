@@ -29,10 +29,10 @@ const Post = () => {
             body: JSON.stringify(body)
         }
 
-        // const url = `http://${import.meta.env.VITE_BACKEND}:7700/test` ;
-        // console.log(url);
-        // fetch(url).then(res => res.json())
-        // .then(data => console.log(data))
+        const url = `http://${import.meta.env.VITE_BACKEND}:7700/test` ;
+        console.log(url);
+        fetch(url).then(res => res.json())
+        .then(data => console.log(data))
         
 
         
