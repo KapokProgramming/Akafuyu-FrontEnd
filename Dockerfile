@@ -8,8 +8,8 @@ RUN apk add --no-cache nodejs yarn
 
 RUN yarn
 
-# ARG VITE_BACKEND
-# ENV VITE_BACKEND=$VITE_BACKEND
+ARG VITE_BACKEND
+ENV VITE_BACKEND=$VITE_BACKEND
 
 RUN yarn build
 
