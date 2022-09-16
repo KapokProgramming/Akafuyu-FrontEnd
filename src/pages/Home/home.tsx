@@ -15,7 +15,9 @@ const getDisplayPost = async (): Promise<Response> => {
 }
 
 const Home = () => {
+
     const { data, isLoading, error } = useQuery<Response>('data', getDisplayPost);
+
 
     if (error) {
         return (
@@ -35,8 +37,6 @@ const Home = () => {
         )
     }
 
-
-    console.log(data?.data)
     return (
         <>
             <Navbar />
@@ -45,6 +45,8 @@ const Home = () => {
                     <h2>{post.post_id}. {post.title}</h2>
                 </Grid>
             ))}
+
+            <Link to ={"/posts"}>Find more recipes</Link>
         </>
     );
 }

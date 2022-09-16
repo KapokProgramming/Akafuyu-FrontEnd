@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home/home'
-import Post from './pages/Post/Post'
+import Home from './pages/Home/Home'
+import Post from './pages/AddPost/Post'
 import Status from './pages/Status/Status'
 import { QueryClient, QueryClientProvider } from 'react-query';
 import './main.css';
