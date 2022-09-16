@@ -4,7 +4,11 @@ RUN mkdir /app
 WORKDIR /app
 COPY . /app
 
-RUN npm install -g yarn
+RUN set -eux \
+    & apk add \
+        --no-cache \
+        nodejs \
+        yarn
 
 RUN yarn
 
