@@ -28,13 +28,6 @@ const Post = () => {
             },
             body: JSON.stringify(body)
         }
-
-        const url = `http://${import.meta.env.VITE_BACKEND}:7700/test` ;
-        console.log(url);
-        fetch(url).then(res => res.json())
-        .then(data => console.log(data))
-        
-
         
         const response  = await fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts`, payload)
         const {data,status, errors} = await response.json()
