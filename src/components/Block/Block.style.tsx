@@ -6,18 +6,13 @@ export const Wrapper = styled.div
     justify-content: space-between ;
     flex-direction: column ;
     width:100%;
-    border: 1px solid lightblue ;
-    border-radius: 20px ;
+    border: 1px solid salmon ;
     height: 100% ;
-
-    button {
-        border-radius: 0 0 20px 20px ;
-    }
+    text-decoration:none;
 
     img {
         max-height: 250px;
         object-fit: cover;
-        border-radius: 20px 20px 0 0 ;
     }
 
     div {
@@ -25,4 +20,6 @@ export const Wrapper = styled.div
         padding: 1rem ;
         height: 100% ;
     }
+
+
     ` ;
