@@ -67,10 +67,10 @@ const Login = () => {
                     )}
                     <h1>Login</h1>
                     <Input>
-                        <TextField value={username} onChange={onUsernameChange} fullWidth label="Username" id="fullWidth" required={true} />
+                        <TextField value={username} onChange={onUsernameChange} fullWidth label="Username"  required={true} />
                     </Input>
                     <Input>
-                        <TextField value={password} onChange={onPasswordChange} fullWidth label="Password" id="fullWidth" required={true} type="password" />
+                        <TextField value={password} onChange={onPasswordChange} fullWidth label="Password"  required={true} type="password" />
                     </Input>
                     <Button variant="outlined" size="large" onClick={OnSubmit}>Login</Button>
                 </Contents>

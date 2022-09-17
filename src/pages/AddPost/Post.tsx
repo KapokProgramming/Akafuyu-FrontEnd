@@ -5,10 +5,16 @@ import PostContext from "./PostContext";
 import PostInput from "./PostInput";
 import PostOutput from "./PostOutput";
 import Navbar from "../../components/Navbar/Navbar";
+import { Button, Container, TextField } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
+import Alert from "../../components/Alert/Alert";
 
 const Post = () => {
+    const navigate = useNavigate();
+
     const [markdownText, setMarkdownText] = useState("");
     const [title, setTitle] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const contextValue = {
         markdownText,
@@ -16,6 +22,15 @@ const Post = () => {
     };
 
     const handleSubmitPost = async () => {
+
+        if (!title || !markdownText) {
+            setErrorMessage('Incorrect information')
+            return;
+        }
+        if (markdownText.length <= 20 || markdownText.length > 10000) {
+            setErrorMessage("Content lenght most between 20 to 10000 characters")
+            return;
+        }
 
         const body = {
             title: title,
@@ -29,18 +44,18 @@ const Post = () => {
             },
             body: JSON.stringify(body)
         }
-        
-        const response  = await fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts`, payload)
-        const {data,status, errors} = await response.json()
-        if(errors) {
-            console.error(errors)
+
+        const response = await fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts`, payload)
+        const { data, status, errors } = await response.json()
+        if (errors || status !== "success") {
+            setErrorMessage("Something went wrong");
         }
 
         if (response.ok) {
-            console.log(status)
-            console.log(data)
+            alert("Success");
+            navigate('/');
         }
-        
+
 
     }
 
@@ -48,16 +63,25 @@ const Post = () => {
         <PostContext.Provider value={contextValue}>
             <Navbar />
             <Wrapper>
-                <Title>Markdown Editor</Title>
-                <label>
-                    <h3>Title</h3>
-                    <input type="text" onChange={event => { setTitle(event.target.value) }}></input>
-                </label>
-                <PostInput />
-                <PostOutput />
+
+                {errorMessage.length > 0 && (
+                    <Alert message={errorMessage} />
+                )}
+
+                <Container>
+                    <Title>Post</Title>
+                    <TextField type="text" variant="filled" label="Title" onChange={event => { setTitle(event.target.value) }}></TextField>
+
+                    <PostInput />
+                    <PostOutput />
+
+                    <div style={{ margin: "2rem" }}>
+                        <Button variant="contained" color="primary" onClick={handleSubmitPost}>submit</Button>
+                    </div>
+
+                </Container>
             </Wrapper>
 
-            <button onClick={handleSubmitPost}>submit</button>
         </PostContext.Provider>
     );
 };

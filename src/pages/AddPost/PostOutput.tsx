@@ -8,7 +8,7 @@ const PostOutput = () => {
 
     return (
         <Wrapper>
-            <Title>Converted Text</Title>
+            <Title>Post Sample</Title>
             <ResultArea>
                 <ReactMarkdown>{markdownText}</ReactMarkdown>
             </ResultArea>

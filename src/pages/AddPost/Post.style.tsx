@@ -23,8 +23,5 @@ export const TextArea = styled.textarea`
   width: 100%;
   height: 25rem;
   resize: none;
-  border: none;
-  outline: none;
-  background-color:grey;
   font-size: 17px;
 `;
