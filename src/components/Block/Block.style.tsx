@@ -6,8 +6,7 @@ export const Wrapper = styled.div
     justify-content: space-between ;
     flex-direction: column ;
     width:100%;
-    border: 1px solid salmon ;
-    height: 100% ;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;    height: 100% ;
     text-decoration:none;
 
     img {

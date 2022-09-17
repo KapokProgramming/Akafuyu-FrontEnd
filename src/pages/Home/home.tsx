@@ -4,6 +4,7 @@ import { Wrapper } from "./home.style";
 
 const Home = () => {
 
+
     return (
         <>
             <Navbar />
