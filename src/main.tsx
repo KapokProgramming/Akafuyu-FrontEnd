@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query';
 import './main.css';
@@ -9,8 +8,6 @@ import AddPost from './pages/AddPost/Post'
 import Status from './pages/Status/Status'
 import Posts from './pages/Posts/Posts'
 
-
-
 const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -19,7 +16,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/posts/:page" element={<Posts />}></Route>
-          <Route path="/post" element={<AddPost />}></Route>
+          <Route path="/add/post" element={<AddPost />}></Route>
           <Route path='/status' element={<Status />}></Route>
         </Routes>
       </BrowserRouter>

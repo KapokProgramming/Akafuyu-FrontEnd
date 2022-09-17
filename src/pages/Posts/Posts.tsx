@@ -10,7 +10,6 @@ import { Contents } from "./Posts.style";
 
 const Posts = () => {
     let params = useParams();
-
     const [posts, setPosts] = useState<Post[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isError, setIsError] = useState<boolean>(false);
@@ -22,7 +21,7 @@ const Posts = () => {
 
     useEffect(() => {
         try {
-            fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts`)
+            fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts?page=${page}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.status !== 'success') {
@@ -37,7 +36,7 @@ const Posts = () => {
                 setIsError(true);
             }
         }
-    }, [])
+    }, [page])
 
     if (isLoading) {
         return (
@@ -63,7 +62,15 @@ const Posts = () => {
             <>
                 <Navbar />
                 <SearchBar />
-                Data not found!
+                <Contents>
+                    Data not found!
+                    <div className="btn-group">
+                        {page > 0 &&
+                            <Link to={`/posts/${page - 1}`} ><Button>Previous page</Button></Link>
+                        }
+                        <Link to={`/posts/${page + 1}`} ><Button>Next page</Button></Link>
+                    </div>
+                </Contents>
             </>
         )
     } else {
@@ -80,17 +87,13 @@ const Posts = () => {
                         ))}
                     </Grid>
 
-                    <ButtonGroup
-                        disableElevation
-                        variant="contained"
-                        size='medium'
-                        
-                    >
+                    <div className="btn-group">
                         {page > 0 &&
-                            <Link to={`/posts/${page - 1}`}><Button>Previous page</Button></Link>
+                            <Link to={`/posts/${page - 1}`} ><Button>Previous page</Button></Link>
                         }
-                        <Link to={`/posts/${page + 1}`}><Button>Next page</Button></Link>
-                    </ButtonGroup>
+                        <Link to={`/posts/${page + 1}`} ><Button>Next page</Button></Link>
+                    </div>
+
                 </Contents>
 
 

@@ -6,7 +6,7 @@ const Navbar = () => {
         <Wrapper>
             <div className="topnav">
                 <Link to={'/'} className={'navElement'}>Home</Link>
-                <Link to={'/post'} className={'navElement'} >Post</Link>
+                <Link to={'/add/post'} className={'navElement'} >Post</Link>
                 <Link to={'/status'} className={'navElement'} >About</Link>
                 <Link to={'/#'} className={'navElement'}>Profile</Link>
             </div>

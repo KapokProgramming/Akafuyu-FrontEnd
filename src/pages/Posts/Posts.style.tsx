@@ -8,4 +8,9 @@ top: 15rem;
 left: 10rem ;
 text-align:center;
 padding-bottom: 1rem ;
+
+.btn-group {
+    margin:2rem;
+}
+
 `
