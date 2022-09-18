@@ -1,13 +1,8 @@
 import { Wrapper } from "./Navbar.style";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { logout } from "../../services/data";
 
 const Navbar = () => {
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        window.localStorage.removeItem("jwt");
-        navigate('/');
-    }
 
     let t = window.localStorage.getItem("jwt");
     if (typeof t === 'string') {
@@ -19,7 +14,7 @@ const Navbar = () => {
                         <Link to={'/add/post'} className={'navElement'} >Post</Link>
                         <Link to={'/status'} className={'navElement'} >About</Link>
                         <Link to={'/profile'} className={'navElement'} style={{ float: 'right' }}>Profile</Link>
-                        <Link to= {'#'} onClick={handleLogout} className={'navElement'} style={{ float: 'right' }}>Logout</Link>
+                        <Link to={'#'} onClick={logout} className={'navElement'} style={{ float: 'right' }}>Logout</Link>
                     </div>
                 </Wrapper>
             );

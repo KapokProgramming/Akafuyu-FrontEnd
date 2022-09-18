@@ -11,7 +11,7 @@ type Response = {
 }
 
 const getServerStatus = async (): Promise<Response> => {
-    return await (await fetch(`http://${import.meta.env.VITE_BACKEND}:7700/test`)).json();
+    return await (await fetch(`http://${import.meta.env.VITE_BACKEND}:7700/`)).json();
 }
 
 const Status = () => {
@@ -25,7 +25,7 @@ const Status = () => {
         <>
             <Navbar />
             <Wrapper>
-                <h3>Backend Status: {data?.status} @{data?.data[0]["NOW()"]}</h3>
+                <h3>Backend Status: {data?.data} </h3>
 
                 <Link to="/">back to home</Link>
             </Wrapper>

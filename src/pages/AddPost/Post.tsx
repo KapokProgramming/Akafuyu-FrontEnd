@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { TextArea, Title, Wrapper } from "./Post.style";
-import LinearProgress from '@material-ui/core/LinearProgress';
+import { useEffect, useState } from "react";
+import { Title, Wrapper } from "./Post.style";
+import { useJwt } from "react-jwt";
 import PostContext from "./PostContext";
 import PostInput from "./PostInput";
 import PostOutput from "./PostOutput";
@@ -8,18 +8,53 @@ import Navbar from "../../components/Navbar/Navbar";
 import { Button, Container, TextField } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
+import { JWT } from "../../model";
+import { authHeader } from "../../services/data";
+
+
+
 
 const Post = () => {
     const navigate = useNavigate();
-
     const [markdownText, setMarkdownText] = useState("");
     const [title, setTitle] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+
+    const [jwt, setJwt] = useState<string>('');
+    const [user, setUser] = useState<string>('');
 
     const contextValue = {
         markdownText,
         setMarkdownText
     };
+
+
+    useEffect(() => {
+        const token = window.localStorage.getItem("jwt");
+
+        if (!(token && token.length > 0 && token !== 'null')) {
+            alert('please login');
+            navigate('/');
+        } else {
+            setJwt(token)
+        }
+    }, [])
+
+    const { decodedToken, isExpired } = useJwt<JWT>(jwt);
+
+    useEffect(() => {
+        if (isExpired) {
+            alert('token expired');
+            window.location.href = "/login";
+        } else {
+            if (decodedToken !== null && typeof decodedToken !== 'undefined') {
+                const user_id: string = `${decodedToken.iss}`;
+                setUser(user_id);
+            }
+        }
+    }, [decodedToken]);
+
+
 
     const handleSubmitPost = async () => {
 
@@ -33,6 +68,7 @@ const Post = () => {
         }
 
         const body = {
+            author_id: user,
             title: title,
             raw_body: markdownText
         }
@@ -40,7 +76,8 @@ const Post = () => {
         const payload = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": authHeader()
             },
             body: JSON.stringify(body)
         }
@@ -49,6 +86,7 @@ const Post = () => {
         const { data, status, errors } = await response.json()
         if (errors || status !== "success") {
             setErrorMessage("Something went wrong");
+            console.log(errors)
         }
 
         if (response.ok) {

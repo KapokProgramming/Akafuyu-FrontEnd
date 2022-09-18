@@ -68,7 +68,7 @@ const Posts = () => {
                         {page > 0 &&
                             <Link to={`/posts/${page - 1}`} ><Button>Previous page</Button></Link>
                         }
-                        <Link to={`/posts/${page + 1}`} ><Button>Next page</Button></Link>
+                        {/* <Link to={`/posts/${page + 1}`} ><Button>Next page</Button></Link> */}
                     </div>
                 </Contents>
             </>
@@ -95,7 +95,6 @@ const Posts = () => {
                     </div>
 
                 </Contents>
-
 
             </>
         )
