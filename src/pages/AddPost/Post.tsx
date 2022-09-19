@@ -10,8 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
 import { JWT } from "../../model";
 import { authHeader } from "../../services/data";
-
-
+import { logout } from "../../services/data";
 
 
 const Post = () => {
@@ -45,7 +44,7 @@ const Post = () => {
     useEffect(() => {
         if (isExpired) {
             alert('token expired');
-            window.location.href = "/login";
+            logout();
         } else {
             if (decodedToken !== null && typeof decodedToken !== 'undefined') {
                 const user_id: string = `${decodedToken.iss}`;
