@@ -1,18 +1,17 @@
 import { Wrapper } from "./SearchBar.style";
+import { TextField } from "@material-ui/core";
 
 type Props = {
-
+    onQueryChange : (e: React.ChangeEvent<any>) => void ;
 };
 
-const SearchBar = () => {
+const SearchBar : React.FC<Props> = ({onQueryChange}) => {
     return (
         <Wrapper>
             <div className="wrap">
                 <div className="search">
-                    <input type="text" className="searchTerm" placeholder="What are you looking for?" />
-                    <button type="submit" className="searchButton">
-                        Go
-                    </button>
+                <TextField onChange={onQueryChange} fullWidth label="search" />
+                    {/* <input type="text" onChange={onQueryChange} className="searchTerm" placeholder="What are you looking for?" /> */}
                 </div>
             </div>
         </Wrapper>

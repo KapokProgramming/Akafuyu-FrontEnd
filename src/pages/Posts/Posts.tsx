@@ -13,14 +13,24 @@ const Posts = () => {
     const [posts, setPosts] = useState<Post[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isError, setIsError] = useState<boolean>(false);
-    let page: number = 0;
+    const [isSearching, setIsSearching] = useState<boolean>(false);
+    const [query, setQuery] = useState<string>('');
+    let page: number;
 
-    if (typeof params.page === 'string') {
+    if (typeof params.page === 'string' && /^-?\d+$/.test(params.page)) {
         page = parseInt(params.page);
+    } else {
+        page = -1;
     }
 
     useEffect(() => {
         try {
+            if (page === -1) {
+                setIsSearching(true);
+                setIsLoading(false);
+                return;
+            }
+
             fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts?page=${page}`)
                 .then(res => res.json())
                 .then(data => {
@@ -29,6 +39,7 @@ const Posts = () => {
                         return;
                     }
                     setPosts(data.data)
+                    setIsSearching(false);
                     setIsLoading(false);
                 })
         } catch (e) {
@@ -57,11 +68,41 @@ const Posts = () => {
     }
 
 
+    const onQueryChange = (e: React.ChangeEvent<any>) => {
+        const text = e.target.value;
+        setQuery(text);
+        if (query.length >= 3) {
+            console.log(query)
+            //do search by title
+            // fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts?page=2`)
+            //     .then(res => res.json())
+            //     .then(data => {
+            //         if (data.status !== 'success') {
+            //             setIsError(true);
+            //             return;
+            //         }
+            //         setPosts(data.data)
+            //         setIsSearching(false);
+            //         setIsLoading(false);
+            //     })
+        }
+    }
+
+    if (isSearching) {
+        return (
+            <>
+                <Navbar />
+                <SearchBar onQueryChange={onQueryChange} />
+            </>
+
+        )
+    }
+
     if (posts.length === 0) {
         return (
             <>
                 <Navbar />
-                <SearchBar />
+                <SearchBar onQueryChange={onQueryChange} />
                 <Contents>
                     Data not found!
                     <div className="btn-group">
@@ -77,7 +118,7 @@ const Posts = () => {
         return (
             <>
                 <Navbar />
-                <SearchBar />
+                <SearchBar onQueryChange={onQueryChange} />
                 <Contents>
                     <Grid container spacing={8}>
                         {posts.map(post => (
