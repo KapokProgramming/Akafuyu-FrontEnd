@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Title, Wrapper } from "./Post.style";
-import { useJwt } from "react-jwt";
 import PostContext from "./PostContext";
 import PostInput from "./PostInput";
 import PostOutput from "./PostOutput";
@@ -8,8 +7,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { Button, Container, TextField } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
-import { JWT } from "../../model";
-import { authHeader } from "../../services/data";
+import { authHeader, decodeToken } from "../../services/data";
 import { logout } from "../../services/data";
 
 
@@ -19,40 +17,13 @@ const Post = () => {
     const [title, setTitle] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [jwt, setJwt] = useState<string>('');
-    const [user, setUser] = useState<string>('');
-
     const contextValue = {
         markdownText,
         setMarkdownText
     };
 
-
-    useEffect(() => {
-        const token = window.localStorage.getItem("jwt");
-
-        if (!(token && token.length > 0 && token !== 'null')) {
-            alert('please login');
-            navigate('/');
-        } else {
-            setJwt(token)
-        }
-    }, [])
-
-    const { decodedToken, isExpired } = useJwt<JWT>(jwt);
-
-    useEffect(() => {
-        if (isExpired) {
-            alert('token expired');
-            logout();
-        } else {
-            if (decodedToken !== null && typeof decodedToken !== 'undefined') {
-                const user_id: string = `${decodedToken.iss}`;
-                setUser(user_id);
-            }
-        }
-    }, [decodedToken]);
-
+    const jwt = decodeToken();
+    console.log(jwt)
 
 
     const handleSubmitPost = async () => {
@@ -66,8 +37,13 @@ const Post = () => {
             return;
         }
 
+        if (jwt === undefined) {
+            alert('please login');
+            logout();
+            return;
+        }
         const body = {
-            author_id: user,
+            author: jwt.iss,
             title: title,
             raw_body: markdownText
         }
@@ -81,8 +57,9 @@ const Post = () => {
             body: JSON.stringify(body)
         }
 
+        // console.log(payload)
         const response = await fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts`, payload)
-        const { data, status, errors } = await response.json()
+        const { status, errors } = await response.json()
         if (errors || status !== "success") {
             setErrorMessage("Something went wrong");
             console.log(errors)

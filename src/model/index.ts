@@ -1,4 +1,7 @@
+
 export type Post = {
+    display_name?: string;
+    username: string;
     post_id: string;
     raw_body: string;
     timestamp: string;
@@ -7,16 +10,16 @@ export type Post = {
 }
 
 export type User = {
-    user_id : string ;
-    username : string ;
-    display_name? : string ;
-    bio? : string ;
-    email? : string ;
+    user_id: string;
+    username: string;
+    display_name?: string;
+    bio?: string;
+    email?: string;
 }
 
 export interface JWT {
-    iss : string ;
-    exp : string ;
-    nbf : string ;
-    iat : string ;
+    iss: string;
+    exp: string;
+    nbf: string;
+    iat: string;
 }

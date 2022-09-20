@@ -30,6 +30,7 @@ const PostPage = () => {
                         setIsError(true);
                         return;
                     }
+                    console.log(data.data);
                     setData(data.data)
                     setIsLoading(false);
                 })
@@ -74,7 +75,7 @@ const PostPage = () => {
             <Navbar />
             <Wrapper>
                 <Container>
-                    <Author>Written by Some display name ............</Author>
+                    <Author>Test {data.username}</Author>
                     <Contents>
                         <Title>{data.title}</Title>
                         <ReactMarkdown>{data.raw_body}</ReactMarkdown>

@@ -50,6 +50,7 @@ const Register = () => {
                         return;
                     } else {
                         // window.localStorage.setItem("jwt", data["data"])
+                        alert("Register success")
                         navigate('/login')
                     }
                 })

@@ -50,6 +50,7 @@ const Login = () => {
                     return;
                 }
                 window.localStorage.setItem("jwt", data["data"])
+                alert("Login success")
                 navigate('/')
             })
 

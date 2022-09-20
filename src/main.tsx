@@ -10,6 +10,7 @@ import Posts from './pages/Posts/Posts'
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import PostPage from './pages/Post/Post';
+import Profile from './pages/Profile/Profile';
 
 const client = new QueryClient();
 
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
           <Route path='/login' element = {<Login />}></Route>
           <Route path='/register' element= {<Register/>} />
+          <Route path='/profile/:id' element = {<Profile />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

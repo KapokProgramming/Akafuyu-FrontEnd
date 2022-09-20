@@ -1,3 +1,6 @@
+import { JWT } from "../model";
+import { useJwt } from "react-jwt";
+
 export function authHeader() {
     const token = localStorage.getItem("jwt");
     let jwt = null;
@@ -8,6 +11,21 @@ export function authHeader() {
         return 'Bearer ' + jwt;
     } else {
         return '';
+    }
+}
+
+export function decodeToken() {
+    const token = localStorage.getItem("jwt");
+    if(token === null) return ;
+
+    const { decodedToken, isExpired } = useJwt<JWT>(token);
+    if (isExpired) {
+        alert('token expired');
+        logout() ;
+    }else{
+        if (decodedToken !== null && typeof decodedToken !== 'undefined') {
+            return decodedToken
+        }
     }
 }
 
