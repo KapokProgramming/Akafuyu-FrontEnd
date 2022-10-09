@@ -4,7 +4,12 @@ export type Post = {
     post_id: string;
     post_body: string;
     timestamp: string;
-    title: string;
+}
+
+export type DisplayPost = {
+    author:  string ;
+    post_title:string;
+    post_body: string;
 }
 
 export type User = {

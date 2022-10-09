@@ -2,13 +2,13 @@ import { Container, LinearProgress } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-import { Post } from "../../model";
+import { DisplayPost } from "../../model";
 import { Author, Contents, Title, Wrapper } from "./Post.style";
 import ReactMarkdown from "react-markdown";
 
 const PostPage = () => {
 
-    const [data, setData] = useState({} as Post);
+    const [data, setData] = useState({} as DisplayPost);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isError, setIsError] = useState<boolean>(false);
 
@@ -77,7 +77,7 @@ const PostPage = () => {
                 <Container>
                     <Author>Author: {data.author}</Author>
                     <Contents>
-                        <Title>{data.title}</Title>
+                        <Title>{data.post_title}</Title>
                         <ReactMarkdown>{data.post_body}</ReactMarkdown>
                     </Contents>
                     {/* <h3>STAR BUTTON</h3> */}
