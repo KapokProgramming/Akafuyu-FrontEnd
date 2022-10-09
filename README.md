@@ -1,6 +1,6 @@
 # Akafuyu-FrontEnd
 ## Description
-This repo is the prototype of SE212 Database system and database system design.  
+This repo is the prototype of SE212 Database system and database system design term project.  
 
 ### Feature
 * Basic Authentication
