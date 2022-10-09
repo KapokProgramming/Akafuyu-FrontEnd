@@ -7,6 +7,7 @@ import { Post } from "../../model";
 import { Button, ButtonGroup, Grid } from "@material-ui/core";
 import Block from "../../components/Block/Block"
 import { Contents } from "./Posts.style";
+import { authHeader } from "../../services/data";
 
 const Posts = () => {
     let params = useParams();
@@ -30,8 +31,19 @@ const Posts = () => {
                 setIsLoading(false);
                 return;
             }
+            
 
-            fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts?page=${page}`)
+            const jwt = authHeader() ;
+
+            const payload = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : `Bearer ${jwt}`
+                },
+            }
+
+            fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts?page=${page}`, payload)
                 .then(res => res.json())
                 .then(data => {
                     if (data.status !== 'success') {
