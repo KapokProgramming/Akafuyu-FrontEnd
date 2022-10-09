@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
 width: 80%;
-position: absolute;
+position: fixed;
 display: block;
-top: 15rem;
-left:35rem;
+top: 20%;
+left:30%;
 text-align:center;
 padding-bottom: 1rem ;
 

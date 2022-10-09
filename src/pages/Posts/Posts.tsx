@@ -11,10 +11,10 @@ import { Contents } from "./Posts.style";
 const Posts = () => {
     let params = useParams();
     const [posts, setPosts] = useState<Post[]>([])
+    const [tempPosts, setTempPosts] = useState<Post[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isError, setIsError] = useState<boolean>(false);
     const [isSearching, setIsSearching] = useState<boolean>(false);
-    const [query, setQuery] = useState<string>('');
     let page: number;
 
     if (typeof params.page === 'string' && /^-?\d+$/.test(params.page)) {
@@ -38,7 +38,9 @@ const Posts = () => {
                         setIsError(true);
                         return;
                     }
-                    setPosts(data.data)
+                    console.log(data)
+                    setPosts(data.data);
+                    setTempPosts(data.data);
                     setIsSearching(false);
                     setIsLoading(false);
                 })
@@ -70,11 +72,11 @@ const Posts = () => {
 
     const onQueryChange = (e: React.ChangeEvent<any>) => {
         const text = e.target.value;
-        setQuery(text);
-        if (query.length >= 3) {
-            console.log(query)
-            //do search by title
-            // fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts?page=2`)
+        console.log(text)
+        if (text.length > 2) {
+            setPosts([]);
+            //Perform search
+            // fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts?page=${page}&title=${text}`)
             //     .then(res => res.json())
             //     .then(data => {
             //         if (data.status !== 'success') {
@@ -85,7 +87,10 @@ const Posts = () => {
             //         setIsSearching(false);
             //         setIsLoading(false);
             //     })
+        }else if (text.length === 0 ){
+            setPosts(tempPosts);
         }
+       
     }
 
     if (isSearching) {
@@ -119,6 +124,7 @@ const Posts = () => {
             <>
                 <Navbar />
                 <SearchBar onQueryChange={onQueryChange} />
+                {/* <h4>Search with {query}</h4> */}
                 <Contents>
                     <Grid container spacing={8}>
                         {posts.map(post => (

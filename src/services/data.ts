@@ -8,7 +8,7 @@ export function authHeader() {
         jwt = `${token}`;
     }
     if (jwt) {
-        return 'Bearer ' + jwt;
+        return jwt;
     } else {
         return '';
     }

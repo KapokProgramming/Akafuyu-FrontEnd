@@ -13,11 +13,11 @@ const Item: React.FC<Props> = ({ post }) => (
     <Wrapper>
         <Link to={`/post/${post.post_id}`} style={{ textDecoration: 'none', color:'black' }}>
             <div>
-                <h2>{post.title}</h2>
-                {post.raw_body.length >= 30 ? (
-                    <ReactMarkdown>{post.raw_body.slice(0, 30) + "...."}</ReactMarkdown>
+                <h2>{post.post_title}</h2>
+                {post.post_body.length >= 30 ? (
+                    <ReactMarkdown>{post.post_body.slice(0, 30) + "...."}</ReactMarkdown>
                 ) : (
-                    <ReactMarkdown>{post.raw_body}</ReactMarkdown>
+                    <ReactMarkdown>{post.post_body}</ReactMarkdown>
                 )}
             </div>
         </Link>

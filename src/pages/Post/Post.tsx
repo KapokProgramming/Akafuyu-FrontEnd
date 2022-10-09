@@ -75,11 +75,12 @@ const PostPage = () => {
             <Navbar />
             <Wrapper>
                 <Container>
-                    <Author>Test {data.username}</Author>
+                    <Author>Author: {data.author}</Author>
                     <Contents>
                         <Title>{data.title}</Title>
-                        <ReactMarkdown>{data.raw_body}</ReactMarkdown>
+                        <ReactMarkdown>{data.post_body}</ReactMarkdown>
                     </Contents>
+                    {/* <h3>STAR BUTTON</h3> */}
                 </Container>
             </Wrapper>
         </>

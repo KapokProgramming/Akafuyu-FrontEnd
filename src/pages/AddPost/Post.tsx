@@ -45,7 +45,7 @@ const Post = () => {
         const body = {
             author: jwt.iss,
             title: title,
-            raw_body: markdownText
+            post_body: markdownText
         }
 
         const payload = {

@@ -1,11 +1,9 @@
-
 export type Post = {
-    display_name?: string;
-    username: string;
+    author:  string ;
+    post_title:string;
     post_id: string;
-    raw_body: string;
+    post_body: string;
     timestamp: string;
-    image: string;
     title: string;
 }
 
@@ -14,7 +12,7 @@ export type User = {
     username: string;
     display_name?: string;
     bio?: string;
-    email?: string;
+    email: string;
 }
 
 export interface JWT {

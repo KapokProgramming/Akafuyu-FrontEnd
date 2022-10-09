@@ -30,7 +30,7 @@ const Register = () => {
             const body = {
                 username: username,
                 email: email,
-                displayname: displayname,
+                display_name: displayname,
                 password: password
             }
 

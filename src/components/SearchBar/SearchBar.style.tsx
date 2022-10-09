@@ -2,14 +2,6 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
 
-.search {
-  width: 100%;
-  min-width: 10rem ;
-  position: absolute;
-  display: flex;
-  top: -22rem;
-}
-
 .searchTerm {
   width: 100%;
   border: 3px solid #00B4CC;
@@ -30,7 +22,7 @@ export const Wrapper = styled.div`
 .wrap{
   width: 30%;
   position: absolute;
-  top: 50%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
