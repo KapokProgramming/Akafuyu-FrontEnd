@@ -42,6 +42,7 @@ const Posts = () => {
                     "Authorization" : `Bearer ${jwt}`
                 },
             }
+            console.log(payload)
 
             fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts?page=${page}`, payload)
                 .then(res => res.json())

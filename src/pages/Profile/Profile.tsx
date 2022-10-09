@@ -20,11 +20,11 @@ const Profile = () => {
             fetch(`http://${import.meta.env.VITE_BACKEND}:7700/user/${id}`)
                 .then(res => res.json())
                 .then(data => {
-                    // if (data.status !== 'success') {
-                    //     setIsError(true);
-                    //     setIsLoading(false);
-                    //     return;
-                    // }
+                    if (data.status !== 'success') {
+                        setIsError(true);
+                        setIsLoading(false);
+                        return;
+                    }
                     if (data.data === undefined) {
                         setUser({
                             "user_id": "-1",
@@ -34,7 +34,27 @@ const Profile = () => {
                             "email": "akafy@arknight.ak"
                         })
                     } else {
-                        setUser(data.data);
+                        let display_name = "";
+                        let bio = "" ;
+                        if(data.data.bio.Valid){
+                            bio = data.data.bio.String
+                        }
+
+                        if(data.data.display_name){
+                            display_name = data.data.display_name.String
+                        }
+
+                        console.log(display_name)
+                        console.log(bio)
+
+                        setUser({
+                            "user_id": data.data.user_id,
+                            "username": data.data.username,
+                            "display_name": display_name,
+                            "bio": bio,
+                            "email": data.data.email
+                        })
+
                     }
 
                     setIsLoading(false);
@@ -64,6 +84,7 @@ const Profile = () => {
         )
     }
 
+    // console.log(user)
     return (
         <>
             <Navbar />

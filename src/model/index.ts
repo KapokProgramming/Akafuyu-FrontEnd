@@ -15,8 +15,8 @@ export type DisplayPost = {
 export type User = {
     user_id: string;
     username: string;
-    display_name?: string;
-    bio?: string;
+    display_name: string;
+    bio: string;
     email: string;
 }
 
