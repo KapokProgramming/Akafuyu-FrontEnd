@@ -35,12 +35,19 @@ const Posts = () => {
 
             const jwt = authHeader() ;
 
-            const payload = {
+           
+            let payload = {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization" : `Bearer ${jwt}`
                 },
+            }
+            if(jwt === ''){
+               payload = { method: "GET", headers:{
+                "Content-Type": "application/json",
+                    "Authorization" : ``
+               } } 
             }
             console.log(payload)
 
