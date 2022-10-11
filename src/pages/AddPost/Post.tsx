@@ -4,11 +4,12 @@ import PostContext from "./PostContext";
 import PostInput from "./PostInput";
 import PostOutput from "./PostOutput";
 import Navbar from "../../components/Navbar/Navbar";
-import { Button, Container, TextField } from "@material-ui/core";
+import { Button, Container, FormControlLabel, TextField } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
 import { authHeader, decodeToken } from "../../services/data";
 import { logout } from "../../services/data";
+import Checkbox from "@material-ui/core/Checkbox";
 
 
 const Post = () => {
@@ -22,14 +23,19 @@ const Post = () => {
         setMarkdownText
     };
 
+    const [isFollowerOnly, setIsFollowerOnly] = useState(false);
+    const handleFollowerCheckBoxChange = (e :any) => {
+
+        setIsFollowerOnly(e.target.checked); 
+    };
+    
+    
+    
     const jwt = decodeToken();
-    console.log(jwt)
-
-
     const handleSubmitPost = async () => {
-
+        
         if (!title || !markdownText) {
-            setErrorMessage('Incorrect information')
+            setErrorMessage('Missing information')
             return;
         }
         if (markdownText.length <= 20 || markdownText.length > 10000) {
@@ -42,11 +48,23 @@ const Post = () => {
             logout();
             return;
         }
+
+        const getPostState = () : string => {
+            if(isFollowerOnly){
+                return "1";
+            }else{
+                return "0";
+            }
+        }
+
         const body = {
             author: jwt.iss,
             post_title: title,
-            post_body: markdownText
+            post_body: markdownText,
+            follower_only: getPostState()
         }
+
+        console.log(body)
 
         const payload = {
             method: "POST",
@@ -72,7 +90,7 @@ const Post = () => {
 
 
     }
-
+    
     return (
         <PostContext.Provider value={contextValue}>
             <Navbar />
@@ -87,8 +105,13 @@ const Post = () => {
                     <TextField type="text" variant="filled" label="Title" onChange={event => { setTitle(event.target.value) }}></TextField>
 
                     <PostInput />
-                    <PostOutput />
+                    <Container>
+                        <FormControlLabel control={<Checkbox checked={isFollowerOnly} onChange={handleFollowerCheckBoxChange} />}
+                        label="For your follower only"/>
+                    </Container>
 
+                    <PostOutput />
+                    
                     <div style={{ margin: "2rem" }}>
                         <Button variant="contained" color="primary" onClick={handleSubmitPost}>submit</Button>
                     </div>

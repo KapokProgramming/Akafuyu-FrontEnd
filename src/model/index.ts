@@ -3,13 +3,16 @@ export type Post = {
     post_title:string;
     post_id: string;
     post_body: string;
+    isFollowerOnlyPost: string ;
     timestamp: string;
 }
 
 export type DisplayPost = {
     author:  string ;
+    author_id?: string ;
     post_title:string;
     post_body: string;
+    star_count: number;
 }
 
 export type User = {

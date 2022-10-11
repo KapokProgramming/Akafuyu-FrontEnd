@@ -43,12 +43,14 @@ const Posts = () => {
                     "Authorization" : `Bearer ${jwt}`
                 },
             }
+
             if(jwt === ''){
                payload = { method: "GET", headers:{
                 "Content-Type": "application/json",
                     "Authorization" : ``
                } } 
             }
+            
             console.log(payload)
 
             fetch(`http://${import.meta.env.VITE_BACKEND}:7700/posts?page=${page}`, payload)
@@ -58,7 +60,7 @@ const Posts = () => {
                         setIsError(true);
                         return;
                     }
-                    console.log(data)
+                    console.log(data.data)
                     setPosts(data.data);
                     setTempPosts(data.data);
                     setIsSearching(false);
@@ -149,7 +151,11 @@ const Posts = () => {
                     <Grid container spacing={8}>
                         {posts.map(post => (
                             <Grid item key={post.post_id} xs={10} sm={4}>
-                                <Block post={post} />
+                                <Block 
+                                post={post} 
+                                isFollowerOnly= {
+                                    String(post.isFollowerOnlyPost) === "1" ? true : false 
+                                } />
                             </Grid>
                         ))}
                     </Grid>

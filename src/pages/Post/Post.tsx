@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import { DisplayPost } from "../../model";
-import { Author, Contents, Title, Wrapper } from "./Post.style";
+import { Author, Contents, StarCount, Title, Wrapper } from "./Post.style";
 import ReactMarkdown from "react-markdown";
 
 const PostPage = () => {
@@ -75,6 +75,7 @@ const PostPage = () => {
             <Navbar />
             <Wrapper>
                 <Container>
+                    <StarCount>Star: {data.star_count}</StarCount>
                     <Author>Author: {data.author}</Author>
                     <Contents>
                         <Title>{data.post_title}</Title>

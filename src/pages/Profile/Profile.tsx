@@ -5,6 +5,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { User } from "../../model";
 import { Author, Wrapper, Contents, Title } from "./Profile.style";
 import { Container } from "@material-ui/core";
+import { authHeader } from "../../services/data";
 
 
 const Profile = () => {
@@ -13,6 +14,7 @@ const Profile = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isError, setIsError] = useState<boolean>(false);
     const [user, setUser] = useState<User>();
+    const jwt = authHeader() ;
 
     useEffect(() => {
         try {
@@ -85,6 +87,40 @@ const Profile = () => {
     }
 
     // console.log(user)
+
+    const updateDisplayname = () => {
+        let newDisplayname = prompt("Please enter your new displayname:", user?.display_name );
+
+        const payload = {
+            "method" : "PUT",
+            Headers : {
+                "Content-Type": "application/json",
+                "Authorization" : `Bearer ${jwt}`
+            },
+            body: {
+                "display_name": newDisplayname
+            }
+        }
+
+        console.log(payload)
+    }
+    const updateBio = () => {
+        let newBio = prompt("Please enter your new bio:", user?.bio );
+
+        const payload = {
+            "method" : "PUT",
+            Headers : {
+                "Content-Type": "application/json",
+                "Authorization" : `Bearer ${jwt}`
+            },
+            body: {
+                "bio":newBio
+            }
+        }
+
+    }
+
+
     return (
         <>
             <Navbar />
@@ -93,13 +129,13 @@ const Profile = () => {
                     <Contents>
                         <Title>{user?.username}</Title>
 
-                        <p>Displayname: {user?.display_name}</p>
+                        <p>Displayname: {user?.display_name}</p> <button onClick={updateDisplayname}>Update displayname</button>
 
                         <h3>Bio</h3>
                         <Container>
                             <p>{user?.bio}</p>
                         </Container>
-
+                        <button onClick={updateBio}>Update bio</button>
                         <p>Email: {user?.email}</p>
 
                     </Contents>

@@ -21,6 +21,11 @@ float:right;
 padding:.5rem;
 color: grey;
 `
+export const StarCount = styled.div`
+float:left;
+padding:.5rem;
+color: grey;
+`
 
 export const Contents = styled.div`
 width:100%;
