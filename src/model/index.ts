@@ -1,5 +1,6 @@
 export type Post = {
     author:  string ;
+    author_name?: string ;
     post_title:string;
     post_id: string;
     post_body: string;
